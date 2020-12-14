@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using LogReg.Models;
+using Microsoft.AspNetCore.Http; 
 
 namespace LogReg.Controllers
 {
@@ -18,7 +19,20 @@ namespace LogReg.Controllers
             _logger = logger;
         }
 
+        [HttpGet("")]
         public IActionResult Index()
+        {
+            return View();
+        }
+
+        [HttpGet("login")]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpGet("success")]
+        public IActionResult Success()
         {
             return View();
         }
