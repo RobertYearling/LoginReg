@@ -4,8 +4,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LogReg.Models
 {
-    public class LogReg
+    public class User
     {
+        [Key]
+        public int UserId {get;set;}
+
         [Required]
         [MinLength(2)]
         [Display(Name="First Name: ")]
@@ -27,10 +30,14 @@ namespace LogReg.Models
         [Display(Name="Password: ")]
         public string Password { get; set; }
 
+        public DateTime CreateAt {get;set;} = DateTime.Now;
+        public DateTime UpdatedAt {get;set;} = DateTime.Now;
+// Not mapped keeps ConfirmPW out of our SQL tables.
         [NotMapped]
         [Required(ErrorMessage = "Confirm Password required")]
-        [CompareAttribute("Password", ErrorMessage = "No Matchie, No Workie")]
+        [Compare("Password")]
         [Display(Name="Confirm Password: ")]
-        public string CFPassword { get; set; }
+        [DataType(DataType.Password)]
+        public string ConfirmPW { get; set; }
     }
 }

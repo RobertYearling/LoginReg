@@ -26,7 +26,7 @@ namespace LogReg
         {
             services.AddControllersWithViews();
             services.AddSession();
-            services.AddDbContext<MyContext>(options => options.UseMySql (Configuration["DBInfo:ConnectionString"]));
+            services.AddDbContext<HomeContext>(options => options.UseMySql (Configuration["DBInfo:ConnectionString"]));
             services.AddMvc(options => options.EnableEndpointRouting = false);
         }
 
@@ -47,8 +47,6 @@ namespace LogReg
 
             app.UseRouting();
 
-            app.UseMvc();
-
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -57,6 +55,8 @@ namespace LogReg
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            app.UseMvc();
         }
     }
 }
